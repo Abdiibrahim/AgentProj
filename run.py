@@ -20,7 +20,6 @@ nodes.createNodeListFromFile("map.txt")
 
 print "Total nodes: ", len(nodes.nodeList)
 
-
 #pacman = PacMan(nodes.nodeList[randint(0, 2499)])
 ghost1 = Ghost(nodes.nodeList[randint(0, 2499)])
 ghost1.color = (255, 0, 0)
@@ -34,6 +33,10 @@ while True:
 
     for event in pygame.event.get():
         if event.type == QUIT:
+            print "Total Moves:"
+            print "Ghost1: ", ghost1.moves
+            print "Ghost2: ", ghost2.moves
+            print "Ghost3: ", ghost3.moves
             exit()
 
     #pacman.update(time_passed)

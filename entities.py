@@ -12,7 +12,7 @@ class DynamicEntity(object):
         self.speed = 100
         self.setPosition()
         self.keyDown = False
-        self.color = (255,255,255)
+        self.color = (255, 255, 255)
         
     def setPosition(self):
         self.position = Vector2D(self.node.position.x, self.node.position.y)

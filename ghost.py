@@ -12,6 +12,7 @@ class Ghost(DynamicEntity):
         self.color = (0, 0, 255)
         self.direction = RIGHT
         self.target = self.node.neighbors[self.direction]
+        self.moves = 0
         #self.poi = Vector2D()
         
     def update(self, dt):
@@ -29,6 +30,7 @@ class Ghost(DynamicEntity):
             index = randint(0, len(validDirections)-1)
             self.direction = validDirections[index]
             self.target = self.node.neighbors[self.direction]
+            self.moves += 1
         
     #def move(self, direction):
     #    pass

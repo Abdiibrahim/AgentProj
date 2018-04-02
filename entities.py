@@ -1,7 +1,6 @@
 import pygame
-from pygame.locals import *
-from vectors import Vector2D
 from constants import *
+from vectors import Vector2D
 
 
 class DynamicEntity(object):

@@ -6,6 +6,7 @@ from world import World
 
 
 pygame.init()
+
 SCREENSIZE = (102*gridUnit, 102*gridUnit)
 screen = pygame.display.set_mode(SCREENSIZE, 0, 32)
 background = pygame.Surface(screen.get_size())
@@ -15,7 +16,7 @@ background.fill((0, 0, 0))
 nodes = NodeGroup(gridUnit, gridUnit)
 nodes.createNodeListFromFile("map.txt")
 
-world = World(pygame)
+world = World()
 pygame_clock = pygame.time.Clock()
 
 print "Total nodes:", len(nodes.nodeList)

@@ -1,6 +1,5 @@
 """Position is just an (x, y) position in a grid.  Width and height are the width and height of a single grid unit.  So if the inputted position is (3,5) that refers to the 3rd column and 5th row.  To get actual pixel position you need to multiply by the width and height of the grid unit."""
 import pygame
-from vectors import Vector2D
 from numpy import loadtxt
 from stacks import Stack
 from constants import *

@@ -1,15 +1,15 @@
-import pygame
-from pygame.locals import *
-from vectors import Vector2D
 from constants import *
 from entities import DynamicEntity
 from random import randint
 
 
 class Ghost(DynamicEntity):
+    id_count = 1
+
     def __init__(self, node):
         DynamicEntity.__init__(self, node)
-        # self.id = 1 make this update every time a Ghost object is instantiated
+        self.id = Ghost.id_count
+        Ghost.id_count += 1
         self.color = (0, 0, 255)
         self.direction = RIGHT
         self.target = self.node.neighbors[self.direction]
@@ -26,18 +26,16 @@ class Ghost(DynamicEntity):
             self.position = self.node.position
 
             validDirections = self.getValidDirections()
-
             distanceVector = pacman.position - self.position
             distanceSquared = distanceVector.magnitudeSquared()
-            if (distanceSquared <= self.radiusSquared) and (distanceSquared != 0):
 
-                # CHeck the targets associated agent, if it isn't this agents target dont go to it, return the position of the target and tell the other agents
-
+            if distanceSquared < self.radiusSquared:
                 index = self.getClosestNode(validDirections)
-                self.poi = pacman.position
-                if distanceSquared == 0:
-                    print self.moves
-                    self.poi = Vector2D()
+                # Check the targets associated agent, if it isn't this agents target dont go to it, return the position of the target and tell the other agents
+                if self.id == pacman.owner:
+                    self.poi = pacman.position
+                    self.checkFound(pacman)
+                    # Remove target from target list
             else:
                 index = randint(0, len(validDirections)-1)
             self.direction = validDirections[index]
@@ -61,6 +59,12 @@ class Ghost(DynamicEntity):
                 if not key == self.direction * -1:
                     validDirections.append(key)
         return validDirections
+
+    def checkFound(self, target):
+        if self.position == target.position:
+            self.setPosition()
+            self.direction = STOP
+            print self.moves
 
     #def getTargets(self):
     #    targets = []

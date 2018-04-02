@@ -8,28 +8,31 @@ from entities import DynamicEntity
 class PacMan(DynamicEntity):
     def __init__(self, node):
         DynamicEntity.__init__(self, node)
-        self.color = (255,255,0)
+        self.color = (255, 255, 0)
+
+        # self.agentibelcongto = # tie this to the id of the agent this target is tied to
         
     def update(self, dt):
         self.position += self.direction*self.speed*dt
-        key_pressed = pygame.key.get_pressed()
-        if key_pressed[K_UP]:
-            self.move(UP)
-        elif key_pressed[K_DOWN]:
-            self.move(DOWN)
-        elif key_pressed[K_LEFT]:
-            self.move(LEFT)
-        elif key_pressed[K_RIGHT]:
-            self.move(RIGHT)
-        else: #invalid or no key press
-            overshot = self.overshotTarget()
-            if overshot:
-                self.node = self.target
-                if self.node.portalNode:
-                    self.node = self.node.portalNode
-                    self.position = self.node.position
-                self.continueDirection()
+        #key_pressed = pygame.key.get_pressed()
+        #if key_pressed[K_UP]:
+        #    self.move(UP)
+        #elif key_pressed[K_DOWN]:
+        #    self.move(DOWN)
+        #elif key_pressed[K_LEFT]:
+        #    self.move(LEFT)
+        #elif key_pressed[K_RIGHT]:
+        #    self.move(RIGHT)
+        #else: #invalid or no key press
+        #    overshot = self.overshotTarget()
+        #    if overshot:
+        #        self.node = self.target
+        #        if self.node.portalNode:
+        #            self.node = self.node.portalNode
+        #            self.position = self.node.position
+        #       self.continueDirection()
 
+'''
     def move(self, direction):
         keyedDirection = direction
         if self.direction == STOP:
@@ -51,3 +54,4 @@ class PacMan(DynamicEntity):
                 self.target = self.node.neighbors[keyedDirection]
             else:
                 self.continueDirection()
+'''

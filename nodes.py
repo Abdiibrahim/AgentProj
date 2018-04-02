@@ -83,7 +83,7 @@ class NodeGroup(object):
         self.fRows, self.fCols = self.grid.shape
         startNode = self.findFirstNodeInGrid(self.fRows, self.fCols)
         self.nodeStack.push(startNode)
-        print self.grid.shape
+        # print self.grid.shape
         while not self.nodeStack.isEmpty():
             node = self.nodeStack.pop()
             self.addNode(node)

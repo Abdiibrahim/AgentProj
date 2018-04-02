@@ -9,30 +9,35 @@ from random import randint
 class Ghost(DynamicEntity):
     def __init__(self, node):
         DynamicEntity.__init__(self, node)
+        # self.id = 1 make this update every time a Ghost object is instantiated
         self.color = (0, 0, 255)
         self.direction = RIGHT
         self.target = self.node.neighbors[self.direction]
         self.moves = 0
         self.poi = Vector2D()
-        self.radiusSquared = (gridUnit * 10) ** 2
-        
+        self.radiusSquared = (gridUnit * 22)**2
+
     def update(self, dt, pacman):
         #print self.direction
         self.position += self.direction*self.speed*dt
         overshot = self.overshotTarget()
         if overshot:
             self.node = self.target
-            #if self.node.portalNode:
-            #    self.node = self.node.portalNode
             self.position = self.node.position
 
             validDirections = self.getValidDirections()
+
             distanceVector = pacman.position - self.position
             distanceSquared = distanceVector.magnitudeSquared()
+            if (distanceSquared <= self.radiusSquared) and (distanceSquared != 0):
 
-            if distanceSquared <= self.radiusSquared:
+                # CHeck the targets associated agent, if it isn't this agents target dont go to it, return the position of the target and tell the other agents
+
                 index = self.getClosestNode(validDirections)
                 self.poi = pacman.position
+                if distanceSquared == 0:
+                    print self.moves
+                    self.poi = Vector2D()
             else:
                 index = randint(0, len(validDirections)-1)
             self.direction = validDirections[index]
@@ -57,17 +62,5 @@ class Ghost(DynamicEntity):
                     validDirections.append(key)
         return validDirections
 
-'''
-class Clyde(Ghost):
-    def __init__(self, node):
-        Ghost.__init__(self, node)
-        self.color = (255, 165, 0)
-        self.radiusSquared = (gridUnit * 10)**2
-
-    def setTargetPOI(self, pacman):
-        distanceVector = pacman.position - self.position
-        distanceSquared = distanceVector.magnitudeSquared()
-        if distanceSquared <= self.radiusSquared:
-            self.update.index = self.getClosestNode(self.validDirections)
-            self.poi = pacman.position
-'''
+    #def getTargets(self):
+    #    targets = []

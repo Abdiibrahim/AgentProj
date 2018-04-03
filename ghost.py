@@ -10,10 +10,14 @@ class Ghost(DynamicEntity):
         DynamicEntity.__init__(self, node)
         self.id = Ghost.id_count
         Ghost.id_count += 1
+
         self.color = (0, 0, 255)
         self.direction = RIGHT
         self.nextNode = self.node.neighbors[self.direction]
+
         self.moves = 0
+        self.targetsFound = 0
+
         self.poi = Vector2D()
         self.radiusSquared = (gridUnit * 22)**2
 
@@ -41,7 +45,9 @@ class Ghost(DynamicEntity):
                 # Check the targets associated agent, if it isn't this agents target dont go to it, return the position of the target and tell the other agents
                 if self.id == closestTarget.owner:
                     self.poi = closestTarget.position
-                    self.checkFound(closestTarget)
+                    if self.position == closestTarget.position:
+                        self.setFound(targetList[closestTargetIndex])
+                        index = randint(0, len(validDirections) - 1)
                     # Remove target from target list
                 if self.id != closestTarget.owner:
                     self.alertOwner()
@@ -66,10 +72,9 @@ class Ghost(DynamicEntity):
                     validDirections.append(key)
         return validDirections
 
-    def checkFound(self, target):
-        if self.position == target.position:
-            self.setPosition()
-            self.direction = STOP
+    def setFound(self, target):
+            target.isFound = True
+            self.targetsFound += 1
             print self.moves
 
     def alertOwner(self):

@@ -7,6 +7,7 @@ class PacMan(DynamicEntity):
         self.color = (255, 255, 0)
         # self.agentibelcongto = # tie this to the id of the agent this target is tied to
         self.owner = ownerID
+        self.isFound = False
         
     def update(self, dt):
         #self.position += self.direction*self.speed*dt

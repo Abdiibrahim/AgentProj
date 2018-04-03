@@ -28,15 +28,26 @@ class World(object):
         #print self.clyde5.id
 
         # initialize targets
-        self.target = PacMan(self.nodes.nodeList[randint(0, 2499)], self.clyde1.id)
-        self.target.color = (240, 128, 128)
+        self.targetRed1 = PacMan(self.nodes.nodeList[randint(0, 2499)], self.clyde1.id)
+        self.targetRed1.color = (240, 128, 128)
+        self.targetRed2 = PacMan(self.nodes.nodeList[randint(0, 2499)], self.clyde1.id)
+        self.targetRed2.color = (240, 128, 128)
+        self.targetGreen1 = PacMan(self.nodes.nodeList[randint(0, 2499)], self.clyde2.id)
+        self.targetGreen1.color = (128, 240, 128)
+        self.targetGreen2 = PacMan(self.nodes.nodeList[randint(0, 2499)], self.clyde2.id)
+        self.targetGreen2.color = (128, 240, 128)
 
-        self.Targets = [self.target]
+        self.Targets = [self.targetRed1, self.targetRed2, self.targetGreen1, self.targetGreen2]
         for target in self.Targets:
             print target.owner
 
     def update(self, time_passed, screen):
+        if self.clyde1.targetsFound == 2 or self.clyde2.targetsFound == 2:
+            self.targetsAquired()
+
         for target in self.Targets:
+            if target.isFound:
+                self.Targets.remove(target)
             target.update(time_passed)
         self.clyde1.update(time_passed, self.Targets)
         self.clyde2.update(time_passed, self.Targets)
@@ -54,3 +65,10 @@ class World(object):
 
     def returnNodes(self):
         return self.nodes
+
+    def targetsAquired(self):
+        print "\n"
+        print "Targets Found:"
+        print "Red  ", self.clyde1.targetsFound
+        print "Green", self.clyde2.targetsFound
+        exit()

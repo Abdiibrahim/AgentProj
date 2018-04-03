@@ -51,6 +51,7 @@ class Ghost(DynamicEntity):
                     # Remove target from target list
                 if self.id != closestTarget.owner:
                     self.alertOwner()
+                    index = randint(0, len(validDirections) - 1)
             else:
                 index = randint(0, len(validDirections)-1)
             self.direction = validDirections[index]
@@ -75,7 +76,8 @@ class Ghost(DynamicEntity):
     def setFound(self, target):
             target.isFound = True
             self.targetsFound += 1
-            print self.moves
+            #print self.moves
 
     def alertOwner(self):
-        print "Alerting owner"
+        #print "Alerting owner"
+        pass

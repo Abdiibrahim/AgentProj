@@ -6,7 +6,7 @@ from vectors import Vector2D
 class DynamicEntity(object):
     def __init__(self, node):
         self.node = node
-        self.target = node
+        self.nextNode = node
         self.direction = STOP
         self.speed = 100
         self.setPosition()
@@ -34,19 +34,19 @@ class DynamicEntity(object):
         '''Get the next target as specified by the direction'''
         key = direction
         if self.node.neighbors[key] is not None:
-            self.target = self.node.neighbors[key]
+            self.nextNode = self.node.neighbors[key]
         else:
             self.restOnNode()
 
     def reverseDirection(self):
         tempNode = self.node
-        self.node = self.target
-        self.target = tempNode
+        self.node = self.nextNode
+        self.nextNode = tempNode
         self.direction *= -1
         
     def overshotTarget(self):
         '''Returns True if moved passed target, False otherwise'''
-        vec1 = self.target.position - self.node.position
+        vec1 = self.nextNode.position - self.node.position
         vec2 = self.position - self.node.position
         nodeToTarget = vec1.magnitudeSquared()
         nodeToSelf = vec2.magnitudeSquared()

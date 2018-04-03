@@ -1,6 +1,5 @@
 import pygame
 from pygame.locals import *
-from nodes import NodeGroup
 from constants import *
 from world import World
 
@@ -13,13 +12,9 @@ background = pygame.Surface(screen.get_size())
 background = background.convert()
 background.fill((0, 0, 0))
 
-nodes = NodeGroup(gridUnit, gridUnit)
-nodes.createNodeListFromFile("map.txt")
-
 world = World()
+world.returnNodes()
 pygame_clock = pygame.time.Clock()
-
-print "Total nodes:", len(nodes.nodeList)
 
 while True:
 
@@ -30,6 +25,6 @@ while True:
     time_passed = pygame_clock.tick(30) / 1000.0
 
     screen.blit(background, (0, 0))
-    nodes.render(screen)
+    world.nodes.render(screen)
     world.update(time_passed, screen)
     pygame.display.update()

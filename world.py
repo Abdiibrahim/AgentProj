@@ -7,10 +7,10 @@ from constants import *
 
 class World(object):
     def __init__(self):
-
         self.nodes = NodeGroup(gridUnit, gridUnit)
         self.nodes.createNodeListFromFile("map.txt")
 
+        # initialize agents
         self.clyde1 = Ghost(self.nodes.nodeList[randint(0, 2499)])
         self.clyde1.color = (255, 0, 0)
         #print self.clyde1.id
@@ -27,20 +27,30 @@ class World(object):
         self.clyde5.color = (128, 0, 128)
         #print self.clyde5.id
 
-        self.pacman = PacMan(self.nodes.nodeList[1275], self.clyde1.id)
+        # initialize targets
+        self.target = PacMan(self.nodes.nodeList[randint(0, 2499)], self.clyde1.id)
+        self.target.color = (240, 128, 128)
+
+        self.Targets = [self.target]
+        for target in self.Targets:
+            print target.owner
 
     def update(self, time_passed, screen):
+        for target in self.Targets:
+            target.update(time_passed)
+        self.clyde1.update(time_passed, self.Targets)
+        self.clyde2.update(time_passed, self.Targets)
+        self.clyde3.update(time_passed, self.Targets)
+        self.clyde4.update(time_passed, self.Targets)
+        self.clyde5.update(time_passed, self.Targets)
 
-        self.pacman.update(time_passed)
-        self.clyde1.update(time_passed, self.pacman)
-        self.clyde2.update(time_passed, self.pacman)
-        self.clyde3.update(time_passed, self.pacman)
-        self.clyde4.update(time_passed, self.pacman)
-        self.clyde5.update(time_passed, self.pacman)
-
-        self.pacman.render(screen)
+        for target in self.Targets:
+            target.render(screen)
         self.clyde1.render(screen)
         self.clyde2.render(screen)
         self.clyde3.render(screen)
         self.clyde4.render(screen)
         self.clyde5.render(screen)
+
+    def returnNodes(self):
+        return self.nodes

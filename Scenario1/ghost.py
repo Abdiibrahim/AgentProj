@@ -21,8 +21,7 @@ class Ghost(DynamicEntity):
         self.movesToComplete = None
         self.targetsFound = 0.0
         self.happiness = []
-        self.maxHappiness = 0.0
-        self.minHappiness = 0.0
+        self.isMostHappy = False
 
     def update(self, dt, targetList, checkList):
         #print self.direction
@@ -84,7 +83,7 @@ class Ghost(DynamicEntity):
                             self.setFound(closestTarget)
                         index = randint(0, len(validDirections) - 1)
                 else:
-                    if not closestTarget.isInCheckList and (happiness > 0.002):
+                    if not closestTarget.isInCheckList and (self.isMostHappy is True):
                         self.setIsInCheckList(closestTarget)
                     index = randint(0, len(validDirections) - 1)
             else:

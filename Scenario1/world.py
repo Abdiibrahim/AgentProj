@@ -96,8 +96,47 @@ class World(object):
 
         self.checkList = []
 
+        self.happinessList = []
+
     def update(self, time_passed, screen):
         self.checkTargetsAquired()
+
+        if self.agentRed.happiness:
+            self.happinessList.append(self.agentRed.happiness[-1])
+        if self.agentGreen.happiness:
+            self.happinessList.append(self.agentGreen.happiness[-1])
+        if self.agentBlue.happiness:
+            self.happinessList.append(self.agentBlue.happiness[-1])
+        if self.agentYellow.happiness:
+            self.happinessList.append(self.agentYellow.happiness[-1])
+        if self.agentPurple.happiness:
+            self.happinessList.append(self.agentPurple.happiness[-1])
+
+        if self.happinessList:
+            if self.happinessList.index(max(self.happinessList)) == 0:
+                self.agentRed.isMostHappy = True
+            else:
+                self.agentRed.isMostHappy = False
+
+            if self.happinessList.index(max(self.happinessList)) == 1:
+                self.agentRed.isMostHappy = True
+            else:
+                self.agentRed.isMostHappy = False
+
+            if self.happinessList.index(max(self.happinessList)) == 2:
+                self.agentRed.isMostHappy = True
+            else:
+                self.agentRed.isMostHappy = False
+
+            if self.happinessList.index(max(self.happinessList)) == 3:
+                self.agentRed.isMostHappy = True
+            else:
+                self.agentRed.isMostHappy = False
+
+            if self.happinessList.index(max(self.happinessList)) == 4:
+                self.agentRed.isMostHappy = True
+            else:
+                self.agentRed.isMostHappy = False
 
         for target in self.Targets:
             if target.isInCheckList:

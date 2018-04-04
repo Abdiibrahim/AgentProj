@@ -85,19 +85,19 @@ while True:
         print "\n================="
         print "END OF SIMULATION"
 
-        Data = \
-            [
-                ["Scenario", "Iteration", "Agent Number", "Targets Collected", "Total Moves", "Agent Happiness", "Max Happiness", "Min Happiness", "Avg Happiness", "Standard Deviation Happiness", "Agent Competitiveness"],
-                ["3", "10", "1", world.agentRed.targetsFound, world.agentRed.moves, float(world.agentRed.targetsFound/(world.agentRed.moves + 1)), np.max(world.agentRed.happiness), np.min(world.agentRed.happiness), np.mean(world.agentRed.happiness), np.std(world.agentRed.happiness), ((float(world.agentRed.targetsFound / (world.agentRed.moves + 1))) - np.min(world.agentRed.happiness))/(np.max(world.agentRed.happiness) - np.min(world.agentRed.happiness))],
-                ["3", "10", "2", world.agentGreen.targetsFound, world.agentGreen.moves, float(world.agentGreen.targetsFound/(world.agentGreen.moves + 1)), np.max(world.agentGreen.happiness), np.min(world.agentGreen.happiness), np.mean(world.agentGreen.happiness), np.std(world.agentGreen.happiness), ((float(world.agentGreen.targetsFound / (world.agentGreen.moves + 1))) - np.min(world.agentGreen.happiness))/(np.max(world.agentGreen.happiness) - np.min(world.agentGreen.happiness))],
-                ["3", "10", "3", world.agentBlue.targetsFound, world.agentBlue.moves, float(world.agentBlue.targetsFound/(world.agentBlue.moves + 1)), np.max(world.agentBlue.happiness), np.min(world.agentBlue.happiness), np.mean(world.agentBlue.happiness), np.std(world.agentBlue.happiness), ((float(world.agentBlue.targetsFound / (world.agentBlue.moves + 1))) - np.min(world.agentBlue.happiness))/(np.max(world.agentBlue.happiness) - np.min(world.agentBlue.happiness))],
-                ["3", "10", "4", world.agentYellow.targetsFound, world.agentYellow.moves, float(world.agentYellow.targetsFound/(world.agentYellow.moves + 1)), np.max(world.agentYellow.happiness), np.min(world.agentYellow.happiness), np.mean(world.agentYellow.happiness), np.std(world.agentYellow.happiness), ((float(world.agentYellow.targetsFound / (world.agentYellow.moves + 1))) - np.min(world.agentYellow.happiness))/(np.max(world.agentYellow.happiness) - np.min(world.agentYellow.happiness))],
-                ["3", "10", "5", world.agentPurple.targetsFound, world.agentPurple.moves, float(world.agentPurple.targetsFound/(world.agentPurple.moves + 1)), np.max(world.agentPurple.happiness), np.min(world.agentPurple.happiness), np.mean(world.agentPurple.happiness), np.std(world.agentPurple.happiness), ((float(world.agentPurple.targetsFound / (world.agentPurple.moves + 1))) - np.min(world.agentPurple.happiness))/(np.max(world.agentPurple.happiness) - np.min(world.agentPurple.happiness))]
-            ]
-        myFile = open("scenario_3_iter_10.csv", "w")
-        with myFile:
-            writer = csv.writer(myFile)
-            writer.writerows(Data)
+        #Data = \
+        #    [
+        #        ["Scenario", "Iteration", "Agent Number", "Targets Collected", "Total Moves", "Agent Happiness", "Max Happiness", "Min Happiness", "Avg Happiness", "Standard Deviation Happiness", "Agent Competitiveness"],
+        #        ["3", "10", "1", world.agentRed.targetsFound, world.agentRed.moves, float(world.agentRed.targetsFound/(world.agentRed.moves + 1)), np.max(world.agentRed.happiness), np.min(world.agentRed.happiness), np.mean(world.agentRed.happiness), np.std(world.agentRed.happiness), ((float(world.agentRed.targetsFound / (world.agentRed.moves + 1))) - np.min(world.agentRed.happiness))/(np.max(world.agentRed.happiness) - np.min(world.agentRed.happiness))],
+        #        ["3", "10", "2", world.agentGreen.targetsFound, world.agentGreen.moves, float(world.agentGreen.targetsFound/(world.agentGreen.moves + 1)), np.max(world.agentGreen.happiness), np.min(world.agentGreen.happiness), np.mean(world.agentGreen.happiness), np.std(world.agentGreen.happiness), ((float(world.agentGreen.targetsFound / (world.agentGreen.moves + 1))) - np.min(world.agentGreen.happiness))/(np.max(world.agentGreen.happiness) - np.min(world.agentGreen.happiness))],
+        #        ["3", "10", "3", world.agentBlue.targetsFound, world.agentBlue.moves, float(world.agentBlue.targetsFound/(world.agentBlue.moves + 1)), np.max(world.agentBlue.happiness), np.min(world.agentBlue.happiness), np.mean(world.agentBlue.happiness), np.std(world.agentBlue.happiness), ((float(world.agentBlue.targetsFound / (world.agentBlue.moves + 1))) - np.min(world.agentBlue.happiness))/(np.max(world.agentBlue.happiness) - np.min(world.agentBlue.happiness))],
+        #        ["3", "10", "4", world.agentYellow.targetsFound, world.agentYellow.moves, float(world.agentYellow.targetsFound/(world.agentYellow.moves + 1)), np.max(world.agentYellow.happiness), np.min(world.agentYellow.happiness), np.mean(world.agentYellow.happiness), np.std(world.agentYellow.happiness), ((float(world.agentYellow.targetsFound / (world.agentYellow.moves + 1))) - np.min(world.agentYellow.happiness))/(np.max(world.agentYellow.happiness) - np.min(world.agentYellow.happiness))],
+        #        ["3", "10", "5", world.agentPurple.targetsFound, world.agentPurple.moves, float(world.agentPurple.targetsFound/(world.agentPurple.moves + 1)), np.max(world.agentPurple.happiness), np.min(world.agentPurple.happiness), np.mean(world.agentPurple.happiness), np.std(world.agentPurple.happiness), ((float(world.agentPurple.targetsFound / (world.agentPurple.moves + 1))) - np.min(world.agentPurple.happiness))/(np.max(world.agentPurple.happiness) - np.min(world.agentPurple.happiness))]
+        #    ]
+        #myFile = open("scenario_3_iter_10.csv", "w")
+        #with myFile:
+        #    writer = csv.writer(myFile)
+        #    writer.writerows(Data)
 
         exit()
 

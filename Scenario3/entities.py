@@ -7,7 +7,7 @@ class DynamicEntity(object):
     def __init__(self, node):
         self.node = node
         self.nextNode = node
-        self.speed = 3000
+        self.speed = 200
         self.setPosition()
         self.color = (255, 255, 255)
         

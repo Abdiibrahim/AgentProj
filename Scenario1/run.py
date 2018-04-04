@@ -47,8 +47,8 @@ while True:
         print "Purple", world.agentPurple.moves
         print "Agent Happiness:"
         print "Red   ", float(world.agentRed.targetsFound / (world.agentRed.moves + 1))
-        print "Green ", float(world.agentBlue.targetsFound / (world.agentBlue.moves + 1))
-        print "Blue  ", float(world.agentGreen.targetsFound / (world.agentGreen.moves + 1))
+        print "Green ", float(world.agentGreen.targetsFound / (world.agentGreen.moves + 1))
+        print "Blue  ", float(world.agentBlue.targetsFound / (world.agentBlue.moves + 1))
         print "Yellow", float(world.agentYellow.targetsFound / (world.agentYellow.moves + 1))
         print "Purple", float(world.agentPurple.targetsFound / (world.agentPurple.moves + 1))
         print "Max Happiness:"

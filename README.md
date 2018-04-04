@@ -54,8 +54,7 @@ targets.
 
 ### Deliverables:
 
-1. Your simulation generates a CSV file with the following columns. The name of this CSV is: `G[your
-group number]_1.csv`
+1. Your simulation generates a CSV file with the following columns. The name of this CSV is: `G[your group number]_1.csv`
 
         a. Scenario number (1,2 or 3)
         b. Iteration number

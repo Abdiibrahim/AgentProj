@@ -16,12 +16,15 @@ class Ghost(DynamicEntity):
         self.nextNode = self.node.neighbors[self.direction]
 
         self.moves = 0
+        self.movesToComplete = None
         self.targetsFound = 0
 
         self.poi = Vector2D()
         self.radiusSquared = (gridUnit * 22)**2
 
-    def update(self, dt, targetList):
+        self.closestCheck = None
+
+    def update(self, dt, targetList, checkList):
         #print self.direction
         self.position += self.direction*self.speed*dt
         overshot = self.overshotTarget()
@@ -30,30 +33,47 @@ class Ghost(DynamicEntity):
             self.position = self.node.position
 
             validDirections = self.getValidDirections()
+            self.ownerCheckList = []
+            dummyCheckList = []
+            dummyTargetList = []
 
-            dummylist = []
-            for targ in targetList:
-                targ.distanceVector = targ.position - self.position
-                targ.distanceSquared = targ.distanceVector.magnitudeSquared()
-                dummylist.append(targ.distanceSquared)
+            for check in checkList:
+                if check.owner == self.id:
+                    self.ownerCheckList.append(check)
+            if self.ownerCheckList:
+                for check in self.ownerCheckList:
+                    check.distanceVector = check.position - self.position
+                    check.distanceSquared = check.distanceVector.magnitudeSquared()
+                    dummyCheckList.append(check.distanceSquared)
+                closestCheckIndex = dummyCheckList.index(min(dummyCheckList))
+                self.closestCheck = self.ownerCheckList[closestCheckIndex]
 
-            closestTargetIndex = dummylist.index(min(dummylist))
+            for target in targetList:
+                target.distanceVector = target.position - self.position
+                target.distanceSquared = target.distanceVector.magnitudeSquared()
+                dummyTargetList.append(target.distanceSquared)
+            closestTargetIndex = dummyTargetList.index(min(dummyTargetList))
             closestTarget = targetList[closestTargetIndex]
 
-            if closestTarget.distanceSquared < self.radiusSquared:
+            if self.ownerCheckList:
                 index = self.getClosestNode(validDirections)
-                # Check the targets associated agent, if it isn't this agents target dont go to it, return the position of the target and tell the other agents
+                self.poi = self.closestCheck.position
+                if self.position == self.closestCheck.position:
+                    self.setFound(self.closestCheck)
+            elif closestTarget.distanceSquared <= self.radiusSquared:
+                index = self.getClosestNode(validDirections)
                 if self.id == closestTarget.owner:
                     self.poi = closestTarget.position
                     if self.position == closestTarget.position:
-                        self.setFound(targetList[closestTargetIndex])
+                        if not closestTarget.isFound:
+                            self.setFound(closestTarget)
                         index = randint(0, len(validDirections) - 1)
-                    # Remove target from target list
-                if self.id != closestTarget.owner:
-                    self.alertOwner()
+                else:
+                    if not targetList[closestTargetIndex].isInCheckList:
+                        self.setIsInCheckList(targetList[closestTargetIndex])
                     index = randint(0, len(validDirections) - 1)
             else:
-                index = randint(0, len(validDirections)-1)
+                index = randint(0, len(validDirections) - 1)
             self.direction = validDirections[index]
             self.nextNode = self.node.neighbors[self.direction]
             self.moves += 1
@@ -74,10 +94,12 @@ class Ghost(DynamicEntity):
         return validDirections
 
     def setFound(self, target):
-            target.isFound = True
-            self.targetsFound += 1
-            #print self.moves
+        target.isFound = True
+        self.targetsFound += 1
+        if self.targetsFound == 5:
+            self.movesToComplete = self.moves
+        #print self.moves
+        #print self.movesToComplete
 
-    def alertOwner(self):
-        #print "Alerting owner"
-        pass
+    def setIsInCheckList(self, target):
+        target.isInCheckList = True

@@ -23,20 +23,26 @@ while True:
         if event.type == QUIT:
             exit()
 
-    if world.targetsAquired():
+    if world.checkTargetsAquired():
         print "\n"
         print "Targets Found:"
-        print "Red   ", world.clyde1.targetsFound
-        print "Green ", world.clyde2.targetsFound
-        print "Blue  ", world.clyde3.targetsFound
-        print "Yellow", world.clyde4.targetsFound
-        print "Purple", world.clyde5.targetsFound
+        print "Red   ", world.agentRed.targetsFound
+        print "Green ", world.agentGreen.targetsFound
+        print "Blue  ", world.agentBlue.targetsFound
+        print "Yellow", world.agentYellow.targetsFound
+        print "Purple", world.agentPurple.targetsFound
+        print "Moves to collect all targets:"
+        print "Red   ", world.agentRed.movesToComplete
+        print "Green ", world.agentGreen.movesToComplete
+        print "Blue  ", world.agentBlue.movesToComplete
+        print "Yellow", world.agentYellow.movesToComplete
+        print "Purple", world.agentPurple.movesToComplete
         print "Total Moves:"
-        print "Red   ", world.clyde1.moves
-        print "Green ", world.clyde2.moves
-        print "Blue  ", world.clyde3.moves
-        print "Yellow", world.clyde4.moves
-        print "Purple", world.clyde5.moves
+        print "Red   ", world.agentRed.moves
+        print "Green ", world.agentGreen.moves
+        print "Blue  ", world.agentBlue.moves
+        print "Yellow", world.agentYellow.moves
+        print "Purple", world.agentPurple.moves
         exit()
 
     time_passed = pygame_clock.tick(30) / 1000.0

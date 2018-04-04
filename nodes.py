@@ -62,10 +62,6 @@ class NodeGroup(object):
     def addNode(self, node):
         '''Add a node to the nodeList if not already in the list'''
         nodeInList = self.nodeInList(node)
-        #nodeInList = False
-        #for inode in self.nodeList:
-        #    if node.row == inode.row and node.col == inode.col:
-        #        nodeInList = True
         if not nodeInList:
             self.nodeList.append(node)
 
@@ -106,9 +102,7 @@ class NodeGroup(object):
                 self.nodeStack.push(upNode)
             if downNode is not None and not self.nodeInList(downNode):
                 self.nodeStack.push(downNode)
-        #self.setupPortalNodes()
 
-                
     def followPath(self, direction, row, col):
         if direction == LEFT and col-1 >= 0:
             if self.grid[row][col-1] == "-" or self.grid[row][col-1] == "+":
@@ -140,13 +134,6 @@ class NodeGroup(object):
                 return None
         else:
             return None    
-
-    #def setupPortalNodes(self):
-    #    '''Manually set up the portal nodes'''
-    #    portalNode1 = self.getNode(17, 0)
-    #    portalNode2 = self.getNode(17, 27)
-    #    portalNode1.portalNode = portalNode2
-    #    portalNode2.portalNode = portalNode1
 
     def render(self, screen):
         for node in self.nodeList:

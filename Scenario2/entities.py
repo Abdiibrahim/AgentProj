@@ -7,10 +7,8 @@ class DynamicEntity(object):
     def __init__(self, node):
         self.node = node
         self.nextNode = node
-        #self.direction = STOP
         self.speed = 250
         self.setPosition()
-        #self.keyDown = False
         self.color = (255, 255, 255)
         
     def setPosition(self):

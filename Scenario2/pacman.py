@@ -8,7 +8,4 @@ class PacMan(DynamicEntity):
         self.owner = ownerID
         self.isFound = False
         self.isInCheckList = False
-        
-    def update(self, dt):
-        #self.position += self.direction*self.speed*dt
         self.setPosition()

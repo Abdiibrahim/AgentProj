@@ -10,19 +10,19 @@ class Ghost(DynamicEntity):
         DynamicEntity.__init__(self, node)
         self.id = Ghost.id_count
         Ghost.id_count += 1
-
         self.color = (0, 0, 255)
         self.direction = RIGHT
         self.nextNode = self.node.neighbors[self.direction]
-
-        self.moves = 0
-        self.movesToComplete = None
-        self.targetsFound = 0
-
         self.poi = Vector2D()
         self.radiusSquared = (gridUnit * 22)**2
-
         self.closestCheck = None
+
+        self.moves = 0.0
+        self.movesToComplete = None
+        self.targetsFound = 0.0
+        self.happiness = []
+        self.maxHappiness = 0.0
+        self.minHappiness = 0.0
 
     def update(self, dt, targetList, checkList):
         #print self.direction
@@ -76,7 +76,9 @@ class Ghost(DynamicEntity):
                 index = randint(0, len(validDirections) - 1)
             self.direction = validDirections[index]
             self.nextNode = self.node.neighbors[self.direction]
-            self.moves += 1
+            self.moves += 1.0
+            currentHappiness = self.targetsFound/(self.moves + 1)
+            self.happiness.append(currentHappiness)
 
     def getClosestNode(self, validDirections):
         distances = []
@@ -95,8 +97,8 @@ class Ghost(DynamicEntity):
 
     def setFound(self, target):
         target.isFound = True
-        self.targetsFound += 1
-        if self.targetsFound == 5:
+        self.targetsFound += 1.0
+        if self.targetsFound == 5.0:
             self.movesToComplete = self.moves
         #print self.moves
         #print self.movesToComplete

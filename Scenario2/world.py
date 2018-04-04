@@ -110,7 +110,7 @@ class World(object):
                     self.checkList.remove(target)
                     #print self.checkList
                 self.Targets.remove(target)
-            target.update(time_passed)
+            #target.update()
 
         self.agentRed.update(time_passed, self.Targets, self.checkList)
         self.agentGreen.update(time_passed, self.Targets, self.checkList)
